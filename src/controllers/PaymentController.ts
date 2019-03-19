@@ -26,11 +26,14 @@ class PaymentController {
     public paymentSuccess(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             const paymentService = new PaymentService();
-            paymentService.paymentSuccess((error , result) => {
+            const paymentSuccessBody = req.body;
+            paymentService.paymentSuccess(paymentSuccessBody, (error , result) => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.send(result);
+                    // Redirect to payment success page
+                    const redirectUrl = "http://localhost:4200/payment/success";
+                    res.redirect(redirectUrl);
                 }
             });
         } catch (e) {
@@ -41,11 +44,14 @@ class PaymentController {
     public paymentFailure(req: express.Request, res: express.Response, next: express.NextFunction): void {
         try {
             const paymentService = new PaymentService();
-            paymentService.paymentFailure((error , result) => {
+            const paymentFailureBody = req.body;
+            paymentService.paymentFailure(paymentFailureBody, (error , result) => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.send(result);
+                    // Redirect to payment failure page
+                    const redirectUrl = "http://localhost:4200/payment/failure";
+                    res.redirect(redirectUrl);
                 }
             });
         } catch (e) {

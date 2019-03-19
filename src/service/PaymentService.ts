@@ -17,19 +17,21 @@ class PaymentService {
                 callback(error, null);
             } else {
                 console.log("Payment Redirection link " + response);
-                callback(error, response);
+                callback(error, {url : response});
             }
         });
     }
 
-    public paymentSuccess(callback: (error: any, response: any) => void) {
+    public paymentSuccess(paymentSuccessBody: any, callback: (error: any, response: any) => void) {
         console.log("Payment Success");
+        console.log("Payment Details : " + JSON.stringify(paymentSuccessBody));
         // You can Update your user payment Success status here
         callback(null, {status : "Payment Success"});
     }
 
-    public paymentFailure(callback: (error: any, response: any) => void) {
+    public paymentFailure(paymentFailureBody: any, callback: (error: any, response: any) => void) {
         console.log("Payment Failure");
+        console.log("Payment Details : " + JSON.stringify(paymentFailureBody));
         // You can Update your user payment Failure status here
         callback(null, {status : "Payment Failed"});
     }
